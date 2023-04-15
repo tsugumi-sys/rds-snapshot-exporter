@@ -81,7 +81,7 @@ def get_env(env_key: str, default_val=None, raise_err: bool = True):
         raise ValueError(f"Environment Value [{env_key}] not found in {os.environ}")
     return value
 
-# aa
+
 def lambda_handler(event, context):
     rds_instance_identifier = get_env("RDS_INSTANCE_IDENTIFIER")
     rds_kms_id = get_env("RDS_KMS_ID")
