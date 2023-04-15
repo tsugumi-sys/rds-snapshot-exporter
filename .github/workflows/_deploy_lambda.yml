@@ -54,8 +54,8 @@ jobs:
       - name: Zip python packages
         run: zip -r ${{ inputs.LAMBDA_ZIP_FILE }} .venv/lib/python3.9/site-packages && rm -rf .venv
 
-      - name: Zip lambad function
-        run: zip -g ${{ inputs.LAMBDA_ZIP_FILE }} .
+      - name: Zip lambda function
+        run: zip -g ${{ inputs.LAMBDA_ZIP_FILE }} $(find . -type f -name "*.py")
 
       - name: Update lambda function
         run: |
