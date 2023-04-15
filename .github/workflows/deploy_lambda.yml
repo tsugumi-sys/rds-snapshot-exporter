@@ -2,13 +2,11 @@
 name: deploy aws lambda
 
 on:
-  pull_request:
+  push:
     branches:
       - main
     paths:
       - rds-snapshot-exporter/aws/lambda/export_rds_snapshot/**/*
-    types:
-      - closed
 
 jobs:
   call_workflow:
