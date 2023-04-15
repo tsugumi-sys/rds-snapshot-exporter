@@ -44,6 +44,8 @@ jobs:
         with:
           python-version: '3.9'
 
+      - run: uname -m
+
       - name: Create package folder
         run: mkdir ${{ inputs.PYTHON_PACKAGE_FOLDER }}
 
