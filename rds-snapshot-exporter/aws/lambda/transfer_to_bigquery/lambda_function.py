@@ -49,3 +49,4 @@ def lambda_handler(event, context):
         os.path.join(f"s3://{source_s3_bucket_name}", export_task_name),
         export_tables_info,
     )
+# a
