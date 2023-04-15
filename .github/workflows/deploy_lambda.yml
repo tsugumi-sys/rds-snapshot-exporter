@@ -12,7 +12,7 @@ on:
 
 jobs:
   call_workflow:
-    uses: .github/workflows/_deploy_lambda.yml
+    uses: ./.github/workflows/_deploy_lambda.yml
     with:
       LAMBDA_FUNCTION_NAME: test-export-rds-snapshot
       WORKING_DIR: rds-snapshot-exporter/aws/lambda/export_rds_snapshot 
