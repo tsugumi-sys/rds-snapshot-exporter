@@ -45,11 +45,15 @@ jobs:
       - name: Create package folder
         run: mkdir ${{ inputs.PYTHON_PACKAGE_FOLDER }}
 
-      - name: Install python packages
-        run: pip install -r requirements.txt -t ${{ inputs.PYTHON_PACKAGE_FOLDER }}
+      - name: Create venv and install python packages
+        run: | 
+          python -m venv .venv && source .venv/bin/activate && pip install -r requirements.txt
 
-      - name: Zip lambda files
-        run: zip -r ${{ inputs.LAMBDA_ZIP_FILE }} .
+      - name: Zip python packages
+        run: zip -r ${{ inputs.LAMBDA_ZIP_FILE }} .venv/lib/python3.9/site-packages && rm -rf .venv
+
+      - name: Zip lambad function
+        run: zip -g ${{ inputs.LAMBDA_ZIP_FILE }} .
 
       - name: Update lambda function
         run: |
