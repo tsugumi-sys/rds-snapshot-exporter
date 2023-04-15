@@ -41,6 +41,8 @@ jobs:
 
       # NOTE: Read python version from .python-version in the workging directory.
       - uses: actions/setup-python@v4
+        with:
+          python-version: '3.9'
 
       - name: Create package folder
         run: mkdir ${{ inputs.PYTHON_PACKAGE_FOLDER }}
@@ -48,8 +50,6 @@ jobs:
       - name: Create venv and install python packages
         run: | 
           python -m venv .venv && source .venv/bin/activate && pip install -r requirements.txt
-
-      - run: ls -a
 
       - name: Zip python packages
         run: zip -r ${{ inputs.LAMBDA_ZIP_FILE }} .venv/lib/python3.9/site-packages && rm -rf .venv
