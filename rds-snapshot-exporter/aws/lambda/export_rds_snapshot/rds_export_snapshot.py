@@ -82,7 +82,6 @@ def get_env(env_key: str, default_val=None, raise_err: bool = True):
     return value
 
 
-# a
 def lambda_handler(event, context):
     rds_instance_identifier = get_env("RDS_INSTANCE_IDENTIFIER")
     rds_kms_id = get_env("RDS_KMS_ID")
