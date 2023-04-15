@@ -1,5 +1,5 @@
 ---
-name: deploy aws lambda
+name: deploy aws lambda of export rds snapshot to s3
 
 on:
   push:

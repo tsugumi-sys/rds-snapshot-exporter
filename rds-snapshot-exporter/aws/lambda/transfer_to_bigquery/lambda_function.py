@@ -50,24 +50,3 @@ def lambda_handler(event, context):
         export_tables_info,
     )
 
-
-if __name__ == "__main__":
-    bq_transferer = BiqQueryTransferer(
-        "ocp-stg",
-        "ocp-stg.rds_snapshot_export_test",
-        "dum",
-        "dum",
-        "dum",
-        local_cred_file="./credentials.json",
-    )
-
-    bq_transferer.transfer_rds_snapshot(
-        "s3://casdca",
-        {
-            "perTableStatus": [
-                {
-                    "target": "ocp-stg.public.test_table",  # this is table name.
-                }
-            ],
-        },
-    )
