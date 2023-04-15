@@ -1,0 +1,57 @@
+---
+name: template of deploy aws lambda
+
+on:
+  workflow_call:
+    inputs:
+      LAMBDA_FUNCTION_NAME:
+        type: string
+        required: true
+      WORKING_DIR:
+        type: string
+        required: true
+      AWS_REGION:
+        type: string
+        required: true
+      PYTHON_PACKAGE_FOLDER:
+        type: string
+        default: packages
+      LAMBDA_ZIP_FILE:
+        type: string
+        default: lambda_function_payload.zip
+    secrets:
+      OIDC_AWS_ROLE_ARN:
+        required: true
+
+jobs:
+  deploy-lambda:
+    runs-on: ubuntu-latest
+    permissions:
+      id-token: write # This is required for requesting the JWT
+      contents: read  # This is required for actions/checkout
+    defaults:
+      run:
+        working-directory: ${{ inputs.WORKING_DIR }}
+    steps:
+      - uses: actions/checkout@v3
+      - uses: aws-actions/configure-aws-credentials@v1
+        with:
+          role-to-assume: ${{ secrets.OIDC_AWS_ROLE_ARN }}
+          aws-region: ${{ inputs.AWS_REGION }}
+      - uses: actions/python@v4
+        with:
+          python-version: '3.9'
+
+      - name: Create package folder
+        run: mkdir ${{ inputs.PYTHON_PACKAGE_FOLDER }}
+
+      - name: Install python packages
+        run: pip install -r requirements.txt -t ${{ inputs.PYTHON_PACKAGE_FOLDER }}
+
+      - name: Zip lambda files
+        run: zip -r . ${{ inputs.LAMBDA_ZIP_FILE }} 
+
+      - name: Update lambda function
+        run: |
+          aws lambda update-function-code --function-name ${{ inputs.LAMBDA_FUNCTION_NAME }} --zip-file fileb://${{ inputs.LAMBDA_ZIP_FILE }}
+          
