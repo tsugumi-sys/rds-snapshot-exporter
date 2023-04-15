@@ -13,9 +13,6 @@ on:
       AWS_REGION:
         type: string
         required: true
-      PYTHON_PACKAGE_FOLDER:
-        type: string
-        default: packages
       LAMBDA_ZIP_FILE:
         type: string
         default: lambda_function_payload.zip
@@ -44,17 +41,13 @@ jobs:
         with:
           python-version: '3.9'
 
-      - run: uname -m
-
-      - name: Create package folder
-        run: mkdir ${{ inputs.PYTHON_PACKAGE_FOLDER }}
-
       - name: Create venv and install python packages
         run: | 
-          python -m venv .venv && source .venv/bin/activate && pip install -r requirements.txt
+          python -m venv .venv && source .venv/bin/activate && pip install -r requirements.txt && deactivate
 
       - name: Zip python packages
-        run: zip -r ${{ inputs.LAMBDA_ZIP_FILE }} .venv/lib/python3.9/site-packages && rm -rf .venv
+        run: |
+          cd .venv/lib/python3.9/site-packages && zip -r ../../../../${{ inputs.LAMBDA_ZIP_FILE }} . && cd ../../../../
 
       - name: Zip lambda function
         run: zip -g ${{ inputs.LAMBDA_ZIP_FILE }} $(find . -type f -name "*.py")
