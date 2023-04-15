@@ -49,7 +49,7 @@ jobs:
         run: pip install -r requirements.txt -t ${{ inputs.PYTHON_PACKAGE_FOLDER }}
 
       - name: Zip lambda files
-        run: zip -r . ${{ inputs.LAMBDA_ZIP_FILE }} 
+        run: zip -r ${{ inputs.LAMBDA_ZIP_FILE }} .
 
       - name: Update lambda function
         run: |
