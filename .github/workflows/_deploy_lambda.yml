@@ -49,7 +49,7 @@ jobs:
         run: | 
           python -m venv .venv && source .venv/bin/activate && pip install -r requirements.txt
 
-      - run: ls .venv/lib
+      - run: ls 
 
       - name: Zip python packages
         run: zip -r ${{ inputs.LAMBDA_ZIP_FILE }} .venv/lib/python3.9/site-packages && rm -rf .venv
