@@ -38,7 +38,7 @@ jobs:
         with:
           role-to-assume: ${{ secrets.OIDC_AWS_ROLE_ARN }}
           aws-region: ${{ inputs.AWS_REGION }}
-      - uses: actions/python@v4
+      - uses: actions/setup-python@v4
         with:
           python-version: '3.9'
 
