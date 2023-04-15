@@ -38,9 +38,9 @@ jobs:
         with:
           role-to-assume: ${{ secrets.OIDC_AWS_ROLE_ARN }}
           aws-region: ${{ inputs.AWS_REGION }}
+
+      # NOTE: Read python version from .python-version in the workging directory.
       - uses: actions/setup-python@v4
-        with:
-          python-version: '3.9'
 
       - name: Create package folder
         run: mkdir ${{ inputs.PYTHON_PACKAGE_FOLDER }}
