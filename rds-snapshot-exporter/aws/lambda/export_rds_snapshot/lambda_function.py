@@ -86,7 +86,7 @@ def lambda_handler(event, context):
     rds_instance_identifier = get_env("RDS_INSTANCE_IDENTIFIER")
     rds_kms_id = get_env("RDS_KMS_ID")
     destination_s3_name = get_env("DESTINATION_S3_NAME")
-    destination_s3_prefix = get_env("DESTINATION_S3_PREFIX")
+    destination_s3_prefix = get_env("DESTINATION_S3_PREFIX", "", False)
     access_s3_role_arn = get_env("ACCESS_S3_ROLE_ARN")
     max_snapshots = int(get_env("MAX_SNAPSHOTS", 20, False))
     exporter = RDSSnapshotExporter(
