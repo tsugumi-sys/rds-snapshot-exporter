@@ -11,14 +11,6 @@ logger.setLevel(logging.INFO)
 
 
 def lambda_handler(event, context):
-    """
-    Test Cases:
-        1. Check if you can get exported tables info.
-        2. Check if you can download secrets.
-        3. Check if you can authenticate and access BigQuery.
-        4. Check if you can create table and send it of a single table.
-        5. Check if you can create and send all tables to BQ.
-    """
     gc_project_id = get_env("GC_PROJECT_ID")
     bigquery_dataset_id = get_env("BIGQUERY_DATASET_ID")
 
@@ -49,5 +41,3 @@ def lambda_handler(event, context):
         os.path.join(f"s3://{source_s3_bucket_name}", export_task_name),
         export_tables_info,
     )
-
-#ca
