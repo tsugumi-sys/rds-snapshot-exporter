@@ -10,6 +10,7 @@ on:
 
 jobs:
   call_workflow:
+    environment: production
     uses: ./.github/workflows/_deploy_lambda.yml
     with:
       LAMBDA_FUNCTION_NAME: test-export-rds-snapshot
