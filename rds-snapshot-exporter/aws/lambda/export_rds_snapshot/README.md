@@ -2,7 +2,7 @@
 
 Posting `RDS.startExportTask` request to target RDS instance.
 
-### Environment Variables
+### Environment variables
 
 Set the following environment variables of aws lambda.
 
