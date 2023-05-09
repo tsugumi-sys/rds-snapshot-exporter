@@ -9,12 +9,10 @@ on:
       - rds-snapshot-exporter/aws/lambda/export_rds_snapshot/**/*
 
 jobs:
-  environment: production
   call_workflow:
     uses: ./.github/workflows/_deploy_lambda.yml
     with:
+      ENVIRONMENT: production
       LAMBDA_FUNCTION_NAME: test-export-rds-snapshot
       WORKING_DIR: rds-snapshot-exporter/aws/lambda/export_rds_snapshot 
       AWS_REGION: ap-northeast-1
-    secrets:
-      OIDC_AWS_ROLE_ARN: ${{ secrets.OIDC_AWS_ROLE_ARN }}

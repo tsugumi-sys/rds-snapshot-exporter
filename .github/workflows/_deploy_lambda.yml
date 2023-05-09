@@ -4,6 +4,9 @@ name: template of deploy aws lambda
 on:
   workflow_call:
     inputs:
+      ENVIRONMENT:
+        type: string
+        required: true
       LAMBDA_FUNCTION_NAME:
         type: string
         required: true
@@ -23,6 +26,7 @@ on:
 jobs:
   deploy-lambda:
     runs-on: ubuntu-latest
+    environment: ${{ inputs.ENVIRONMENT }}
     permissions:
       id-token: write # This is required for requesting the JWT
       contents: read  # This is required for actions/checkout
