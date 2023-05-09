@@ -19,9 +19,6 @@ on:
       LAMBDA_ZIP_FILE:
         type: string
         default: lambda_function_payload.zip
-    secrets:
-      OIDC_AWS_ROLE_ARN:
-        required: true
 
 jobs:
   deploy-lambda:
